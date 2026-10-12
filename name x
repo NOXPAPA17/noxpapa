@@ -1,0 +1,228 @@
+-- [[ NØX HUB V1 👑 ]] --
+-- Credits: NØX
+
+--------------------------------------------------
+-- SEND MESSAGE (Chat Version)
+--------------------------------------------------
+local function send(msg)
+local TextChatService = game:GetService("TextChatService")
+if TextChatService.ChatVersion == Enum.ChatVersion.TextChatService then
+local channel = TextChatService.TextChannels.RBXGeneral
+channel:SendAsync(msg)
+else
+game:GetService("ReplicatedStorage").DefaultChatSystemChatEvents.SayMessageRequest:FireServer(msg, "All")
+end
+end
+
+--------------------------------------------------
+-- LOADED MESSAGE (Chat Execution Msg)
+--------------------------------------------------
+task.spawn(function()
+local line = string.rep("_", 150)
+send(line.."[😎  MAX [THE  LORD] LOADED💀]||>< MAX  HI KHDE LALA🤙🏻")
+end)
+
+-- CONSOLE EXECUTION MESSAGE
+local execMsg = [[
+[👺😎 MAX👅🔥]
+@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@
+@@@@@@@@@
+SPAM LOADED....💀
+]]
+print(execMsg)
+warn(execMsg)
+
+--------------------------------------------------
+-- GUI SETUP
+--------------------------------------------------
+local ScreenGui = Instance.new("ScreenGui")
+local ToggleButton = Instance.new("TextButton")
+local UICorner_Toggle = Instance.new("UICorner")
+local MainFrame = Instance.new("Frame")
+local Title = Instance.new("TextLabel")
+local TargetInput = Instance.new("TextBox")
+local StyleInput = Instance.new("TextBox")
+local DelayInput = Instance.new("TextBox")
+local StartBtn = Instance.new("TextButton")
+local StopBtn = Instance.new("TextButton")
+
+-- Sound Effect on Execution
+local sound = Instance.new("Sound", game.Workspace)
+sound.SoundId = "rbxassetid://18667264971"
+sound:Play()
+
+ScreenGui.Parent = game.CoreGui
+ScreenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+ScreenGui.ResetOnSpawn = false
+
+-- Floating Toggle Button (Moveable)
+ToggleButton.Name = "ToggleButton"
+ToggleButton.Parent = ScreenGui
+ToggleButton.Position = UDim2.new(0.05, 0, 0.2, 0)
+ToggleButton.Size = UDim2.new(0, 55, 0, 55)
+ToggleButton.BackgroundColor3 = Color3.fromRGB(20, 20, 20)
+ToggleButton.Text = "👅"
+ToggleButton.TextSize = 30
+ToggleButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+ToggleButton.Active = true
+UICorner_Toggle.CornerRadius = UDim.new(0, 10)
+UICorner_Toggle.Parent = ToggleButton
+
+local ToggleStroke = Instance.new("UIStroke", ToggleButton)
+ToggleStroke.Thickness = 3
+task.spawn(function()
+while task.wait() do
+ToggleStroke.Color = Color3.fromRGB(255, 0, 0)
+task.wait(0.5)
+ToggleStroke.Color = Color3.fromRGB(255, 255, 0)
+task.wait(0.5)
+end
+end)
+
+-- Main Menu
+MainFrame.Name = "MainFrame"
+MainFrame.Parent = ScreenGui
+MainFrame.BackgroundColor3 = Color3.fromRGB(15, 15, 15)
+MainFrame.Position = UDim2.new(0.35, 0, 0.25, 0)
+MainFrame.Size = UDim2.new(0, 280, 0, 350)
+MainFrame.Visible = false
+MainFrame.Active = true
+
+local RainbowGlow = Instance.new("UIStroke", MainFrame)
+RainbowGlow.Thickness = 3
+RainbowGlow.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+
+task.spawn(function()
+while task.wait() do
+local hue = tick() % 5 / 5
+RainbowGlow.Color = Color3.fromHSV(hue, 1, 1)
+end
+end)
+
+Title.Parent = MainFrame
+Title.Size = UDim2.new(1, 0, 0, 40)
+Title.Text = " MAX HUB V1 👑"
+Title.TextColor3 = Color3.fromRGB(255, 255, 255)
+Title.BackgroundTransparency = 1
+Title.TextSize = 18
+Title.Font = Enum.Font.GothamBold
+
+-- UI Box Styling
+local function CreateBox(obj, text, pos)
+obj.Parent = MainFrame
+obj.Size = UDim2.new(0, 240, 0, 38)
+obj.Position = pos
+obj.BackgroundColor3 = Color3.fromRGB(200, 0, 0)
+obj.TextColor3 = Color3.fromRGB(255, 255, 255)
+obj.PlaceholderText = text
+obj.PlaceholderColor3 = Color3.fromRGB(255, 255, 255)
+obj.Font = Enum.Font.GothamBold
+obj.Text = ""
+local stroke = Instance.new("UIStroke", obj)
+stroke.Color = Color3.fromRGB(255, 255, 255)
+stroke.Thickness = 2
+Instance.new("UICorner", obj).CornerRadius = UDim.new(0, 6)
+end
+
+CreateBox(TargetInput, "[ENTER R4DI NAME]", UDim2.new(0.07, 0, 0.2, 0))
+CreateBox(StyleInput, "[STYLE] e.g. @", UDim2.new(0.07, 0, 0.35, 0))
+CreateBox(DelayInput, "[DELAY] + Slow / - Fast", UDim2.new(0.07, 0, 0.5, 0))
+DelayInput.Text = "1"
+
+-- Start/Stop Buttons
+StartBtn.Parent = MainFrame
+StartBtn.Size = UDim2.new(0, 110, 0, 45)
+StartBtn.Position = UDim2.new(0.07, 0, 0.75, 0)
+StartBtn.BackgroundColor3 = Color3.fromRGB(0, 180, 0)
+StartBtn.Text = "START"
+StartBtn.TextColor3 = Color3.fromRGB(255, 255, 255)
+Instance.new("UICorner", StartBtn)
+
+StopBtn.Parent = MainFrame
+StopBtn.Size = UDim2.new(0, 110, 0, 45)
+StopBtn.Position = UDim2.new(0.53, 0, 0.75, 0)
+StopBtn.BackgroundColor3 = Color3.fromRGB(180, 0, 0)
+StopBtn.Text = "STOP"
+StopBtn.TextColor3 = Color3.fromRGB(255, 255, 255)
+Instance.new("UICorner", StopBtn)
+
+-- Spam Logic
+local spamming = false
+ToggleButton.MouseButton1Click:Connect(function()
+MainFrame.Visible = not MainFrame.Visible
+end)
+
+local function getSpamText(target, symbol)
+local s = (symbol ~= "" and symbol) or "@"
+local lines = {
+"TMKX MEH REACT 😃", "TMKX MEH DRAGON 🐉", "ITNA LALLU FYTER?🤣",
+"TMKX MEH RELATIONSHIP 🩷", "TMKX MEH HULK 🧌", "TMKX MEH GAS ⛽",
+"TMKX MEH CAT 😺", "TMKX MEH GODZILLA 💀", "TMKX MEH VENOM 🦂",
+"TMKX MEH HALWA 🎂", "DAFFN BY MAX😈", "TMKX MEH SIGMA 🗿",
+"TMKX MEH VOID 🔊", "LEAVE KARDE?😂", "TMKX MEH HAGGYS 🌚",
+"TMKX MEH NEW SMITH 🏠", "TMKX MEH DOOR 🚪", "TMKX MEH BEAST 💥",
+"NŌX KA SCRIPT 😇", "TMKX MEH SEA 🌊", "TMKX MEH RAINBOW 🌈",
+"TMKX MEH SHIP 🚢", "TMKX MEH HUG 🫂", "TMKX MEH CHAIR 🪑",
+"BOL MAX P3PA", "TMKX MEH PARLE G 🍪", "ISHAN ON TOP👑",
+"TMKX MEH ALPHA", "TMKX MEH CHAOS", "TMKX MEH BUILDING"
+}
+
+local topSep = string.rep(s, 25)
+local midSep = string.rep(s, 35)
+local selected = lines[math.random(1, #lines)]
+
+return "BY MAX😎\n"..topSep.."\n"..midSep.."\n"..topSep.."\n["..target.."] "..selected
+end
+
+StartBtn.MouseButton1Click:Connect(function()
+if spamming then return end
+spamming = true
+local target = (TargetInput.Text ~= "" and TargetInput.Text) or "Target"
+local symbol = StyleInput.Text
+
+task.spawn(function()
+while spamming do
+local waitTime = tonumber(DelayInput.Text) or 1
+send(getSpamText(target, symbol))
+task.wait(waitTime)
+end
+end)
+end)
+
+StopBtn.MouseButton1Click:Connect(function()
+spamming = false
+end)
+
+-- Mobile/PC Dragging Fix
+local UIS = game:GetService("UserInputService")
+local function MakeDraggable(obj)
+local dragStart, startPos, dragging
+obj.InputBegan:Connect(function(input)
+if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
+dragging = true
+dragStart = input.Position
+startPos = obj.Position
+end
+end)
+UIS.InputChanged:Connect(function(input)
+if dragging and (input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch) then
+local delta = input.Position - dragStart
+obj.Position = UDim2.new(startPos.X.Scale, startPos.X.Offset + delta.X, startPos.Y.Scale, startPos.Y.Offset + delta.Y)
+end
+end)
+UIS.InputEnded:Connect(function(input)
+if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
+dragging = false
+end
+end)
+end
+
+MakeDraggable(ToggleButton)
+MakeDraggable(MainFrame)
